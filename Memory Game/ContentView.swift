@@ -73,8 +73,8 @@ struct ContentView: View {
                             get: { numberOfPairs },
                             set: { newValue in
                                 numberOfPairs = newValue
-                                resetGame() // ✅ Trigger game reset immediately when user picks a value
-                                showPicker = false // ✅ Close the picker
+//                                resetGame() // ✅ Trigger game reset immediately when user picks a value
+                                /*showPicker = false*/ // ✅ Close the picker
                             }
                         )) {
                             ForEach([2, 4, 6, 8, 10], id: \.self) { num in
@@ -85,6 +85,7 @@ struct ContentView: View {
                         .padding()
 
                         Button("Done") {
+                            resetGame()
                             showPicker = false
                         }
                         .padding()
