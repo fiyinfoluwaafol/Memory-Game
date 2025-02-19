@@ -22,6 +22,9 @@ struct ContentView: View {
     ].shuffled()
 
     @State private var flippedCards: [Int] = [] // Track flipped card indices
+    
+    @State private var showPicker = false
+    @State private var numberOfPairs: Int = 2
 
     let columns = [
         GridItem(.flexible()),
@@ -49,6 +52,7 @@ struct ContentView: View {
                 
                 
                 Button(action: {
+                    showPicker.toggle() // ✅ Toggle picker visibility
                 }) {
                     Text("Choose Size")
                         .font(.headline)
@@ -59,6 +63,36 @@ struct ContentView: View {
                         .cornerRadius(10)
                 }
                 .padding(.horizontal)
+                .sheet(isPresented: $showPicker) {
+                    VStack {
+                        Text("Select Number of Pairs")
+                            .font(.headline)
+                            .padding()
+
+                        Picker("Pairs", selection: Binding(
+                            get: { numberOfPairs },
+                            set: { newValue in
+                                numberOfPairs = newValue
+                                resetGame() // ✅ Trigger game reset immediately when user picks a value
+                                showPicker = false // ✅ Close the picker
+                            }
+                        )) {
+                            ForEach([2, 4, 6, 8, 10], id: \.self) { num in
+                                Text("\(num) Pairs")
+                            }
+                        }
+                        .pickerStyle(WheelPickerStyle()) // ✅ Uses a scrolling wheel UI
+                        .padding()
+
+                        Button("Done") {
+                            showPicker = false
+                        }
+                        .padding()
+                    }
+                    .presentationDetents([.fraction(0.3)]) // ✅ Adjust sheet height
+                }
+
+
                        
             }
             
@@ -115,19 +149,11 @@ struct ContentView: View {
     }
     
     func resetGame() {
-        // ✅ Reinitialize the `cards` array with fresh, shuffled cards
-        cards = [
-            Card(emoji: "💀"), Card(emoji: "💀"),
-            Card(emoji: "🐶"), Card(emoji: "🐶"),
-            Card(emoji: "🐱"), Card(emoji: "🐱"),
-            Card(emoji: "🐭"), Card(emoji: "🐭"),
-            Card(emoji: "🐸"), Card(emoji: "🐸"),
-            Card(emoji: "🦊"), Card(emoji: "🦊"),
-            Card(emoji: "🐯"), Card(emoji: "🐯"),
-            Card(emoji: "🐷"), Card(emoji: "🐷"),
-            Card(emoji: "🐹"), Card(emoji: "🐹"),
-            Card(emoji: "🐰"), Card(emoji: "🐰")
-        ].shuffled() // ✅ Shuffle the cards for randomness
+        let allEmojis = ["💀", "🐶", "🐱", "🐭", "🐸", "🦊", "🐯", "🐷", "🐹", "🐰"]
+        let selectedEmojis = allEmojis.prefix(numberOfPairs) // ✅ Get the right number of pairs
+
+        cards = selectedEmojis.flatMap { [Card(emoji: $0), Card(emoji: $0)] }.shuffled() // ✅ Generate card pairs and shuffle
+
 
         // ✅ Reset card states
         for i in cards.indices {

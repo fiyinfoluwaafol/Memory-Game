@@ -26,7 +26,7 @@ The following **required** functionality is completed:
  
 The following **optional** features are implemented:
 
-- [ ] User can select number of pairs to play with (at least 2 unique values like 2 and 4).
+- [x] User can select number of pairs to play with (at least 2 unique values like 2 and 4).
   * (Hint: user Picker)
 - [x] App allows for user to scroll to see pairs out of view.
   * (Hint: Use a Scrollview)
