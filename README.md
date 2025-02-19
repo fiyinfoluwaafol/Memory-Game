@@ -30,7 +30,7 @@ The following **optional** features are implemented:
   * (Hint: user Picker)
 - [x] App allows for user to scroll to see pairs out of view.
   * (Hint: Use a Scrollview)
-- [ ] Add any flavor you’d like to your UI with colored buttons or backgrounds, unique cards, etc. 
+- [x] Add any flavor you’d like to your UI with colored buttons or backgrounds, unique cards, etc. 
   * Enhance the visual appeal of the app with colored buttons, backgrounds, or unique card designs.
   * Consider using animations or transitions to make the user experience more engaging.
 

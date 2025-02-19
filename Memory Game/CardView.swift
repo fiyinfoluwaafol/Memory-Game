@@ -38,6 +38,8 @@ struct CardView: View {
                             didTap()
                         }
         }
+        .rotation3DEffect(.degrees(card.isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
+        .animation(.default, value: card.isFlipped)
     }
 }
 
