@@ -11,6 +11,7 @@ struct Card: Identifiable {
     let id = UUID()
     let emoji: String
     var isFlipped: Bool = false
+    var isMatched: Bool = false
 }
 
 
@@ -31,8 +32,11 @@ struct CardView: View {
             }
         }
         .frame(width: 110, height: 150)
+        .opacity(card.isMatched ? 0 : 1)
         .onTapGesture {
-            didTap() // ✅ Notify `ContentView` when tapped
+            if !card.isMatched { // ✅ Prevent taps on matched cards
+                            didTap()
+                        }
         }
     }
 }

@@ -45,7 +45,7 @@ struct ContentView: View {
 
     func flipCard(at index: Int) {
         if flippedCards.contains(index) {
-            // ✅ User tapped the same card again, so remove it from flippedCards
+            // ✅ If user taps the same card again, remove it from flippedCards
             flippedCards.removeAll { $0 == index }
             cards[index].isFlipped.toggle()
             return
@@ -55,7 +55,31 @@ struct ContentView: View {
             cards[index].isFlipped.toggle()
             flippedCards.append(index)
         }
+
+        if flippedCards.count == 2 {
+            let firstIndex = flippedCards[0]
+            let secondIndex = flippedCards[1]
+
+            if cards[firstIndex].emoji == cards[secondIndex].emoji {
+                print(">>> Correct!\n")
+                
+                // ✅ Mark cards as "removed" instead of deleting immediately
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    cards[firstIndex].isMatched = true  // ✅ Mark cards as matched
+                    cards[secondIndex].isMatched = true
+                    flippedCards.removeAll()
+                }
+            } else {
+                // ❌ Cards do not match → Flip back after delay
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    cards[firstIndex].isFlipped.toggle()
+                    cards[secondIndex].isFlipped.toggle()
+                    flippedCards.removeAll()
+                }
+            }
+        }
     }
+
 }
 
 #Preview {

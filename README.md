@@ -16,7 +16,7 @@ The following **required** functionality is completed:
 - [x] Users can tap cards to toggle their display between the back and the face: 
   - Tapping on a facedown card should flip it to reveal the front.
   - Tapping a second card that is not identical should flip both back down
-- [ ] When two matching cards are found, they both disappear from view:
+- [x] When two matching cards are found, they both disappear from view:
   - Implement logic to check if two tapped cards match.
   - If they match, both cards should either disappear.
   - If they don't match, they should return to the facedown position.
