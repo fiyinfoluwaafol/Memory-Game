@@ -13,7 +13,7 @@ The following **required** functionality is completed:
 - [x] App loads to display a grid of cards initially placed face-down:
   - Upon launching the app, a grid of cards should be visible.
   - Cards are facedown to indicate the start of the game.
-- [ ] Users can tap cards to toggle their display between the back and the face: 
+- [x] Users can tap cards to toggle their display between the back and the face: 
   - Tapping on a facedown card should flip it to reveal the front.
   - Tapping a second card that is not identical should flip both back down
 - [ ] When two matching cards are found, they both disappear from view:

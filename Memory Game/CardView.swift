@@ -7,42 +7,38 @@
 
 import SwiftUI
 
-struct Card: View {
-    
-    @State private var isFlipped = false
-    
-    var emoji: String
-    
-    static let mockedCards = [
-        Card(emoji: "💀"), Card(emoji: "💀"),
-        Card(emoji: "🐶"), Card(emoji: "🐶"),
-        Card(emoji: "🐱"), Card(emoji: "🐱"),
-        Card(emoji: "🐭"), Card(emoji: "🐭"),
-        Card(emoji: "🐸"), Card(emoji: "🐸"),
-        Card(emoji: "🦊"), Card(emoji: "🦊"),
-        Card(emoji: "🐯"), Card(emoji: "🐯"),
-        Card(emoji: "🐷"), Card(emoji: "🐷"),
-        Card(emoji: "🐹"), Card(emoji: "🐹"),
-        Card(emoji: "🐰"), Card(emoji: "🐰")
-    ]
+struct Card: Identifiable {
+    let id = UUID()
+    let emoji: String
+    var isFlipped: Bool = false
+}
+
+
+struct CardView: View {
+    var card: Card
+    var didTap: () -> Void // Closure to notify `ContentView`
+
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 25.0)
-                .fill(isFlipped ? .white : .blue)
-                .stroke(isFlipped ? .black : .blue, lineWidth: 2)
-            if isFlipped {
-                Text(emoji)
+            RoundedRectangle(cornerRadius: 18.0)
+                .fill(card.isFlipped ? .white : .blue)
+                .stroke(card.isFlipped ? .black : .blue, lineWidth: 2)
+
+            if card.isFlipped {
+                Text(card.emoji)
                     .font(.system(size: 40))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
         }
-        .frame(width: 100, height: 150)
+        .frame(width: 110, height: 150)
         .onTapGesture {
-            isFlipped.toggle()
+            didTap() // ✅ Notify `ContentView` when tapped
         }
     }
 }
 
 #Preview {
-    Card(emoji: "🐶")
+    CardView(card: Card(emoji: "🐶", isFlipped: true)) {
+        print("Card tapped")
+    }
 }
