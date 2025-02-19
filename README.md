@@ -42,10 +42,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-Here is a reminder on how to embed Loom videos on GitHub. Feel free to remove this reminder once you upload your README. 
+![Project4](https://github.com/user-attachments/assets/56fcf5df-af62-414a-8238-aa8c8d15a360)
 
-[Guide]](https://www.youtube.com/watch?v=GA92eKlYio4) .
-
+P.S. for the stretch feature of adding flavor to UI, I added animations for card flipping
 ## Notes
 
 Describe any challenges encountered while building the app.
