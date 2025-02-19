@@ -30,17 +30,51 @@ struct ContentView: View {
     ]
 
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 15) {
-                ForEach(cards.indices, id: \.self) { index in
-                    CardView(card: cards[index]) {
-                        flipCard(at: index)
+        VStack {
+            
+            HStack {
+                // ✅ Reset Button
+                Button(action: {
+                    resetGame() // Calls the function we wrote earlier
+                }) {
+                    Text("Reset Game")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding(.horizontal)
+                
+                
+                Button(action: {
+                }) {
+                    Text("Choose Size")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding(.horizontal)
+                       
+            }
+            
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 15) {
+                    ForEach(cards.indices, id: \.self) { index in
+                        CardView(card: cards[index]) {
+                            flipCard(at: index)
+                        }
                     }
                 }
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
+            .frame(maxHeight: .infinity)
         }
-        .frame(maxHeight: .infinity)
+
     }
 
     func flipCard(at index: Int) {
@@ -78,6 +112,31 @@ struct ContentView: View {
                 }
             }
         }
+    }
+    
+    func resetGame() {
+        // ✅ Reinitialize the `cards` array with fresh, shuffled cards
+        cards = [
+            Card(emoji: "💀"), Card(emoji: "💀"),
+            Card(emoji: "🐶"), Card(emoji: "🐶"),
+            Card(emoji: "🐱"), Card(emoji: "🐱"),
+            Card(emoji: "🐭"), Card(emoji: "🐭"),
+            Card(emoji: "🐸"), Card(emoji: "🐸"),
+            Card(emoji: "🦊"), Card(emoji: "🦊"),
+            Card(emoji: "🐯"), Card(emoji: "🐯"),
+            Card(emoji: "🐷"), Card(emoji: "🐷"),
+            Card(emoji: "🐹"), Card(emoji: "🐹"),
+            Card(emoji: "🐰"), Card(emoji: "🐰")
+        ].shuffled() // ✅ Shuffle the cards for randomness
+
+        // ✅ Reset card states
+        for i in cards.indices {
+            cards[i].isFlipped = false
+            cards[i].isMatched = false
+        }
+
+        // ✅ Clear flipped cards tracking
+        flippedCards.removeAll()
     }
 
 }

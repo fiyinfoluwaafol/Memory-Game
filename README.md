@@ -4,7 +4,7 @@ Submitted by: **Fiyinfoluwa Afolayan**
 
 **Memory Game** is an app that ... [TODO] 
 
-Time spent: **2** hours spent in total
+Time spent: **3** hours spent in total
 
 ## Required Features
 
@@ -20,7 +20,7 @@ The following **required** functionality is completed:
   - Implement logic to check if two tapped cards match.
   - If they match, both cards should either disappear.
   - If they don't match, they should return to the facedown position.
-- [ ] User can reset the game and start a new game via a button:
+- [x] User can reset the game and start a new game via a button:
   - Include a button that allows users to reset the game.
   - This button should shuffle the cards and reset any game-related state.
  
